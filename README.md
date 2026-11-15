@@ -32,9 +32,3 @@ python3 -m http.server 8000
 ```
 
 Abre [http://localhost:8000](http://localhost:8000). El proyecto usa HTML, CSS y JavaScript, sin dependencias ni compilación.
-
-## Publicar y actualizar
-
-GitHub Pages sirve los archivos de la raíz de la rama `main`. Para publicar una copia del repositorio, abre **Settings → Pages**, selecciona **Deploy from a branch**, elige **main → / (root)** y guarda. GitHub mostrará la URL HTTPS cuando termine el despliegue.
-
-Si modificas los recursos de la app, incrementa la versión de la caché en `sw.js` antes de subir los cambios. Para regenerar los iconos PNG de la carpeta `icons/`, ejecuta `python3 generate-icons.py`.
