@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14151b" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Memoria Externa">
+  <title>Memoria Externa</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="shell brand">
+    <img src="./icons/icon-192.png" alt="" width="36" height="36">
+    <span>Memoria Externa</span>
+  </header>
+  <main class="shell">
+    <noscript>Activa JavaScript para usar Memoria Externa.</noscript>
+    <p id="loading" role="status">Cargando Memoria Externa…</p>
+    <p id="storage" role="alert"></p>
+    <section id="capture" role="tabpanel" aria-labelledby="tab-capture" hidden>
+      <h1>Captura</h1>
+      <form id="capture-form" class="card">
+        <label class="sr-only" for="draft">Texto de la captura</label>
+        <textarea id="draft" rows="5" placeholder="¿Qué tienes en la cabeza? Pega un enlace, idea o tarea..." aria-describedby="capture-help"></textarea>
+        <div class="row composer-tools">
+          <button id="paste" type="button">Pegar</button>
+          <output id="kind" class="badge" for="draft" hidden></output>
+        </div>
+        <p id="capture-help" aria-live="polite"></p>
+        <button class="primary full" type="submit" aria-keyshortcuts="Control+Enter Meta+Enter">Guardar</button>
+        <small class="shortcut">Ctrl + Enter / ⌘ + Enter</small>
+      </form>
+      <p id="offline" class="muted" role="status"></p>
+    </section>
+    <section id="inbox" role="tabpanel" aria-labelledby="tab-inbox" hidden>
+      <h1>Bandeja</h1>
+      <div id="filters" class="row" role="group" aria-label="Filtrar entradas">
+        <button data-filter="all" aria-pressed="true">Todos</button>
+        <button data-filter="idea" aria-pressed="false">Ideas</button>
+        <button data-filter="link" aria-pressed="false">Enlaces</button>
+        <button data-filter="task" aria-pressed="false">Tareas</button>
+      </div>
+      <p id="empty" class="empty" role="status"></p>
+      <ul id="entries"></ul>
+      <details class="card backup">
+        <summary>Exportar y gestionar datos</summary>
+        <p>El Markdown incluye el texto, el tipo, la fecha de captura y el estado de todas las entradas pendientes y archivadas.</p>
+        <div class="row">
+          <button id="download">Descargar Markdown</button>
+          <button id="copy-all">Copiar Markdown</button>
+          <button id="clear" class="danger">Borrar todo</button>
+        </div>
+      </details>
+    </section>
+  </main>
+  <div id="feedback" role="status" aria-atomic="true"></div>
+  <nav class="dock" aria-label="Navegación principal">
+    <div class="shell tabs" role="tablist" aria-label="Memoria Externa">
+      <button id="tab-capture" role="tab" aria-selected="true" aria-controls="capture">Captura</button>
+      <button id="tab-inbox" role="tab" aria-selected="false" aria-controls="inbox" tabindex="-1">Bandeja <span id="count" class="badge">0</span></button>
+    </div>
+  </nav>
+  <dialog id="confirm" aria-labelledby="confirm-title" aria-describedby="confirm-info">
+    <form method="dialog">
+      <h2 id="confirm-title">¿Borrar todas las entradas?</h2>
+      <p id="confirm-info">Se eliminarán las entradas pendientes y archivadas de este dispositivo. Exporta una copia antes si quieres conservarlas.</p>
+      <div class="row">
+        <button value="cancel" autofocus>Cancelar</button>
+        <button value="delete" class="danger">Borrar definitivamente</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="manual" aria-labelledby="manual-title">
+    <form method="dialog">
+      <h2 id="manual-title">Copiar manualmente</h2>
+      <p>Selecciona el texto y usa Copiar para pegarlo donde quieras.</p>
+      <textarea id="manual-text" aria-label="Texto para copiar" rows="5" readonly></textarea>
+      <button>Cerrar</button>
+    </form>
+  </dialog>
+</body>
+</html>
